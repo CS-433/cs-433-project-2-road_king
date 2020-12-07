@@ -30,14 +30,13 @@ class down_block(nn.Module):
         self.max_pool = nn.MaxPool2d(2, 2)
         self.DoubleConv = DoubleConv(in_channels, out_channels)
         self.dropout = dropout
-        self.dropoutlayer = nn.Dropout(p=0.5)
+        self.dropoutlayer = nn.Dropout(p=0.2)
 
     def forward(self, x):
         x = self.max_pool(x)
         x = self.DoubleConv(x)
         if self.dropout:
             x = self.dropoutlayer(x)
-
         return x
 
 
@@ -49,7 +48,7 @@ class up_block(nn.Module):
         self.up = nn.Upsample(scale_factor=2, mode='bilinear', align_corners=True)
         self.double_conv = DoubleConv(in_channels + in_channels // 2, out_channels, in_channels // 2)
         self.dropout = dropout
-        self.dropoutlayer = nn.Dropout(p=0.5)
+        self.dropoutlayer = nn.Dropout(p=0.2)
 
     def forward(self, x1, x2):
         x1 = self.up(x1)
@@ -58,7 +57,6 @@ class up_block(nn.Module):
         x = self.double_conv(x)
         if self.dropout:
             x = self.dropoutlayer(x)
-
         return x
 
 
@@ -94,5 +92,4 @@ class UNet(nn.Module):
         x = self.up4(x, x1)
         x = self.OutConv(x)
         # x = self.softmax(x)
-
         return x
