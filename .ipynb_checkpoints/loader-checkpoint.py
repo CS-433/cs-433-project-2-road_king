@@ -53,12 +53,12 @@ class BaseDataset(torch.utils.data.Dataset):
         if self.color_jitter:
             c_jitter = torchvision.transforms.Compose([
                 torchvision.transforms.ColorJitter(brightness=0.2, contrast=0.2, saturation=0.2, hue=0.1),
-                torchvision.transforms.RandomGrayscale(p=0.05),
+                torchvision.transforms.RandomGrayscale(p=0.02),
             ])
             img = c_jitter(img)
         ts = torch.cat([img, mask], dim=0)
         if self.rotation:
-            ts = random_rotate(ts, p=0.875)
+            ts = random_rotate(ts, p=0.8)
             img = ts[:3, :, :]
             mask = ts[3, :, :]
         if self.preprocess is not None:
