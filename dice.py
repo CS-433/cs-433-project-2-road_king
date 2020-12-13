@@ -1,6 +1,11 @@
 import torch
 from torch.autograd import Function
 
+"""
+Dice coefficient for evaluation of binary semantic segmentation
+Credited to https://github.com/milesial/Pytorch-UNet
+"""
+
 
 class DiceCoeff(Function):
     """Dice coeff for individual examples"""
