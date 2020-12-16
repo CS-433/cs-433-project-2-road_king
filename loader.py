@@ -59,7 +59,7 @@ class BaseDataset(torch.utils.data.Dataset):
         ts = torch.cat([img, mask], dim=0)
         # optional rotation on both images and masks
         if self.rotation:
-            ts = random_rotate(ts, p=0.875)
+            ts = random_rotate(ts, prob=0.875)
             img = ts[:3, :, :]
             mask = ts[3, :, :]
         # optional other preprocessing on both images and masks

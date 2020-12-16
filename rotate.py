@@ -23,25 +23,25 @@ def rotate_n90(ts, n=1):
     return rotate(ts)
 
 
-def random_rotate(ts, p=0.9):
+def random_rotate(ts, prob=0.875):
     """
     Random apply rotations with pre-defined range of degrees and probability
     """
     rand = torch.rand(1).item()
-    p = p / 9
-    if rand <= 1.5 * p:  # 30~60
+    p = prob / 7
+    if rand <= p:  # 30~60
         ts = rotate_n45(ts, n=1)
-    elif 1.5 * p < rand < 2.5 * p:  # 90
+    elif p < rand < 2 * p:  # 90
         ts = rotate_n90(ts, n=1)
-    elif 2.5 * p < rand <= 4 * p:  # 120~150
+    elif 2 * p < rand <= 3 * p:  # 120~150
         ts = rotate_n45(ts, n=3)
-    elif 4 * p < rand <= 5 * p:  # 180
+    elif 3 * p < rand <= 4 * p:  # 180
         ts = rotate_180(ts, n=2)
-    elif 5 * p < rand <= 6.5 * p:  # 210~240
+    elif 4 * p < rand <= 5 * p:  # 210~240
         ts = rotate_n45(ts, n=5)
-    elif 6.5 * p < rand <= 7.5 * p:  # 270
+    elif 5 * p < rand <= 6 * p:  # 270
         ts = rotate_270(ts, n=3)
-    elif 7.5 * p < rand <= 9 * p:  # 300~330
+    elif 6 * p < rand <= 7 * p:  # 300~330
         ts = rotate_n45(ts, n=7)
     else:
         ts = ts
