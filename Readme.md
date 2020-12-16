@@ -48,5 +48,34 @@ If [TensorBoard](https://www.tensorflow.org/tensorboard/) is installed, metrics 
 
 Script to generate the same submission file as we submitted in AICrowd with pretrained models.
 
-
 ### ```train.py```
+
+Main script to retrain models with your customized settings.
+
+### ```UNet.py```
+
+Implementation of the modified U-Net model(with optional dropout and batch-normalization).
+
+### ```loader.py```
+Dataloader for loading training and testing data.
+
+### ```training.py```
+
+Fucnctions for training, validaing, saving and loading models.
+
+### ```dice.py```
+
+Define Dice coefficient, the metric we use for validation.
+
+### ```rotate.py```
+
+Functions for random rotations in data augmentation
+
+
+### ```mask_to_submission.py```
+
+Helper functions for generating AICrowd submission file.
+
+## License
+
+The project is licensed under the MIT License.
