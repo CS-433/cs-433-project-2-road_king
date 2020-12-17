@@ -36,11 +36,11 @@ def random_rotate(ts, prob=0.875):
     elif 2 * p < rand <= 3 * p:  # 120~150
         ts = rotate_n45(ts, n=3)
     elif 3 * p < rand <= 4 * p:  # 180
-        ts = rotate_180(ts, n=2)
+        ts = rotate_n90(ts, n=2)
     elif 4 * p < rand <= 5 * p:  # 210~240
         ts = rotate_n45(ts, n=5)
     elif 5 * p < rand <= 6 * p:  # 270
-        ts = rotate_270(ts, n=3)
+        ts = rotate_n90(ts, n=3)
     elif 6 * p < rand <= 7 * p:  # 300~330
         ts = rotate_n45(ts, n=7)
     else:

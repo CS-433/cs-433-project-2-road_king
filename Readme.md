@@ -1,5 +1,5 @@
 # Road Segmentation with U-Net
-**`crowdAI username`:** Dongxu
+**`AIcrowd username`:** dongxu **`AIcrowd submission ID`:** 108563 (F1=0.875) 
 
 **`Team Members`:** Dongxu Guo, Jiaan Zhu, Lei Wang
 
@@ -21,7 +21,7 @@ the following external libraries:<br/>
 
 <a name="model training"></a>
 ## Training and Prediction
-To generate our final AICrowd submission please download our pretrained model [link](). Unzip and place the state dictionary (weights) in  ```pretrained\``` folder. Then execute ```run.py```, you will get the ```submission.csv``` under the  ```submission\``` folder and prediction in ```pred\``` folder.
+To generate our final AICrowd submission please download our pretrained model [link](). Unzip and place the state dictionary (weights) in  ```/pretrained``` folder. Then execute ```run.py```, you will get the ```submission.csv``` under the  ```submission\``` folder and prediction in ```pred\``` folder.
 
 
 You can always retrain our model by running:

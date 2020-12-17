@@ -139,3 +139,4 @@ def save_to_checkpoint(save_path, epoch, model, optimizer, scheduler=None, verbo
 
     if verbose:
         print("saved model at epoch {}".format(epoch))
+

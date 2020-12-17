@@ -1,3 +1,6 @@
+"""
+Implementation of U-Net model with batch normalization and optional dropout
+"""
 import torch
 import torch.nn as nn
 
@@ -45,7 +48,7 @@ class UpBlock(nn.Module):
 
     def __init__(self, in_channels, out_channels, dropout=0.2):
         super(UpBlock, self).__init__()
-        self.up = nn.ConvTranspose2d(in_channels , in_channels // 2, kernel_size=2, stride=2)
+        self.up = nn.ConvTranspose2d(in_channels, in_channels // 2, kernel_size=2, stride=2)
         self.double_conv = DoubleConv(in_channels, out_channels)
         self.dropout = dropout
         self.dropoutlayer = nn.Dropout(p=dropout)
@@ -67,17 +70,17 @@ class UNet(nn.Module):
 
     def __init__(self, n_channels=3, n_classes=1, n_filters=64, dropout=0.2):
         super(UNet, self).__init__()
-        N = n_filters
-        self.inc = DoubleConv(n_channels, N)
-        self.down1 = DownBlock(N, 2 * N, dropout)
-        self.down2 = DownBlock(2 * N, 4 * N, dropout)
-        self.down3 = DownBlock(4 * N, 8 * N, dropout)
-        self.down4 = DownBlock(8 * N, 16 * N, dropout)
-        self.up1 = UpBlock(16 * N, 8 * N, dropout)
-        self.up2 = UpBlock(8 * N, 4 * N, dropout)
-        self.up3 = UpBlock(4 * N, 2 * N, dropout)
-        self.up4 = UpBlock(2 * N, N, dropout)
-        self.OutConv = nn.Conv2d(N, n_classes, kernel_size=1)
+        nf = n_filters
+        self.inc = DoubleConv(n_channels, nf)
+        self.down1 = DownBlock(nf, 2 * nf, dropout)
+        self.down2 = DownBlock(2 * nf, 4 * nf, dropout)
+        self.down3 = DownBlock(4 * nf, 8 * nf, dropout)
+        self.down4 = DownBlock(8 * nf, 16 * nf, dropout)
+        self.up1 = UpBlock(16 * nf, 8 * nf, dropout)
+        self.up2 = UpBlock(8 * nf, 4 * nf, dropout)
+        self.up3 = UpBlock(4 * nf, 2 * nf, dropout)
+        self.up4 = UpBlock(2 * nf, nf, dropout)
+        self.OutConv = nn.Conv2d(nf, n_classes, kernel_size=1)
         # self.softmax = nn.Softmax(dim=1)
 
     def forward(self, x):
@@ -93,4 +96,3 @@ class UNet(nn.Module):
         x = self.OutConv(x)
         # x = self.softmax(x)
         return x
-

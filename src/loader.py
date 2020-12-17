@@ -24,7 +24,7 @@ class BaseDataset(torch.utils.data.Dataset):
                if not file.startswith('.')]
         ids.sort()
         n = len(ids)
-        assert image_set in ["all", "train", "val"],"image set should be train,val or all"
+        assert image_set in ["all", "train", "val"], "image set should be train,val or all"
         assert split_ratio < 1, "split ratio should be within (0,1)"
         if image_set == "train":
             ids = ids[:int(n * split_ratio)]
@@ -84,6 +84,7 @@ class TestDataset(torch.utils.data.Dataset):
     """
     Dataset for loading test images
     """
+
     def __init__(self, test_dir, num_imgs=50, to_numpy=False):
         self.test_dir = test_dir
         self.num_imgs = num_imgs
