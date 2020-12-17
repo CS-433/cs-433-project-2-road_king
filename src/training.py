@@ -49,7 +49,7 @@ def train_epoch(model: torch.nn.Module,  # U-Net
 
     return train_epoch_loss, iteration
 
-
+"""
 def val_epoch(model: torch.nn.Module,
               criterion: Any,  # torch.nn.loss_fun
               val_loader: torch.utils.data.dataloader.DataLoader,
@@ -58,7 +58,8 @@ def val_epoch(model: torch.nn.Module,
               device: torch.device = torch.device("cuda"),
               dataset_type: str = 'val',
               verbose: bool = True) -> float:
-    """ Validation loop (no backprop)
+    """ 
+    Validation loop (no backprop)
     Obtains the loss on the validation (or test) data
     """
     # freeze model
@@ -86,8 +87,8 @@ def val_epoch(model: torch.nn.Module,
         writer.add_scalar('{} epoch loss'.format(dataset_type), val_epoch_loss, epoch)
 
     return val_epoch_loss
-
-
+"""
+    
 def eval_model(model: torch.nn.Module,
                loader: torch.utils.data.dataloader.DataLoader,
                epoch: int,
