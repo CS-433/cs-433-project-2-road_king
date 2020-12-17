@@ -49,42 +49,7 @@ def train_epoch(model: torch.nn.Module,  # U-Net
 
     return train_epoch_loss, iteration
 
-"""
-def val_epoch(model: torch.nn.Module,
-              criterion: Any,  # torch.nn.loss_fun
-              val_loader: torch.utils.data.dataloader.DataLoader,
-              epoch: int,
-              writer: Optional[torch.utils.tensorboard.writer.SummaryWriter] = None,
-              device: torch.device = torch.device("cuda"),
-              dataset_type: str = 'val',
-              verbose: bool = True) -> float:
-    # freeze model
-    model.eval()
-    val_running_loss = 0.0
-    with torch.no_grad():
-        for i, batch in enumerate(val_loader):
-            imgs = batch['image'].to(device, non_blocking=True)
-            true_masks = batch['mask']
-            true_masks = true_masks.to(device, non_blocking=True)
-            masks_pred = model(imgs)
-            loss = criterion(masks_pred, true_masks)
-            # record loss
-            val_running_loss += float(loss.item())
-            if verbose:
-                idx = batch["ID"]
-                print("ID:", idx, f" validation loss {i}: ", float(loss.item()))
-
-            if writer is not None:
-                writer.add_scalar(f'Loss/{dataset_type}', loss.item(), i)
-
-    val_epoch_loss = val_running_loss / len(val_loader)
-
-    if writer is not None:
-        writer.add_scalar('{} epoch loss'.format(dataset_type), val_epoch_loss, epoch)
-
-    return val_epoch_loss
-"""
-    
+  
 def eval_model(model: torch.nn.Module,
                loader: torch.utils.data.dataloader.DataLoader,
                epoch: int,
@@ -92,8 +57,9 @@ def eval_model(model: torch.nn.Module,
                device: torch.device = torch.device("cuda"),
                dataset_type: str = 'eval',
                verbose: bool = True) -> float:
-    """ Validation loop (no backprop)
-    Obtains the loss on the validation (or test) data
+    """ 
+    Validation loop (no backprop)
+    Evaluate model on validation data based on dice coefficient score
     """
     # freeze model
     model.eval()
@@ -137,3 +103,34 @@ def save_to_checkpoint(save_path, epoch, model, optimizer, scheduler=None, verbo
     if verbose:
         print("saved model at epoch {}".format(epoch))
 
+def load_from_checkpoint(checkpoint_path, model, optimizer = None, scheduler = None, verbose = True):
+    """Loads model from checkpoint, loads optimizer and scheduler too if not None, 
+       and returns epoch and iteration of the checkpoints
+    """
+    if not os.path.exists(checkpoint_path):
+        raise ("File does not exist {}".format(checkpoint_path))
+        
+    if torch.cuda.is_available():
+        checkpoint = torch.load(checkpoint_path)
+    else:
+        checkpoint = torch.load(checkpoint_path,map_location='cpu')
+        
+    check_keys = list(checkpoint.keys())
+
+    model.load_state_dict(checkpoint['model']) 
+    
+    if 'optimizer' in check_keys:
+        if optimizer is not None:
+            optimizer.load_state_dict(checkpoint['optimizer'])
+
+    if 'scheduler' in check_keys:
+        if scheduler is not None:
+            scheduler.load_state_dict(checkpoint['scheduler'])
+  
+    if 'epoch' in check_keys:
+        epoch = checkpoint['epoch']
+       
+    if verbose: # optional printing
+        print(f"Loaded model from checkpoint {checkpoint_path}")
+
+    return epoch
