@@ -58,10 +58,6 @@ def val_epoch(model: torch.nn.Module,
               device: torch.device = torch.device("cuda"),
               dataset_type: str = 'val',
               verbose: bool = True) -> float:
-    """ 
-    Validation loop (no backprop)
-    Obtains the loss on the validation (or test) data
-    """
     # freeze model
     model.eval()
     val_running_loss = 0.0
