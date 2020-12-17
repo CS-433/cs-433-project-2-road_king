@@ -21,7 +21,7 @@ the following external libraries:<br/>
 
 <a name="model training"></a>
 ## Training and Prediction
-To generate our final AICrowd submission of F1-score 0.875, please download our pretrained model [link](https://drive.google.com/file/d/1H6buWtMwnx4Ne71PwIWaOJQ8q0ok8T3P/view?usp=sharing). Unzip and place the state dictionary (weights) in  ```/pretrained``` folder. Then execute ```run.py```, you will get the ```submission.csv``` under the  ```/submission``` folder and prediction in ```/pred``` folder. In some systems you may need to modify the system path.
+To generate our final AICrowd submission please download our pretrained model [link](). Unzip and place the state dictionary (weights) in  ```/pretrained``` folder. Then execute ```run.py```, you will get the ```submission.csv``` under the  ```submission\``` folder and prediction in ```pred\``` folder.
 
 
 You can always retrain our model by running:
@@ -36,14 +36,14 @@ The optional arguments can be used to:
   - modify the model architecture
   - specify the model save path and saving conditions
 
-The defualt setting is what gives us the best performed model. Howerver, since we use random data augmentation and do not set the seed, the exact reproducibility of our result is not ensured. 
+The defualt setting is what gives us the best performed model. Howerver, since we use random data augmentation and do not set the seed, the exact reproducibility of our result is not ensured.
 
 If [TensorBoard](https://www.tensorflow.org/tensorboard/) is installed, metrics (training losses and validation score) can be tracked and visualized. To launch Tensorboard, run: 
 
 `tensorboard --logdir=path/to/logdir`
 
 ## Modules
-All modules are provided in src. Addionally we provide a small ipynb script to give a a glance about our segmentation results.
+All modules are provided in src.
 
 ### ```run.py```
 
