@@ -103,6 +103,7 @@ def save_to_checkpoint(save_path, epoch, model, optimizer, scheduler=None, verbo
     if verbose:
         print("saved model at epoch {}".format(epoch))
 
+        
 def load_from_checkpoint(checkpoint_path, model, optimizer = None, scheduler = None, verbose = True):
     """Loads model from checkpoint, loads optimizer and scheduler too if not None, 
        and returns epoch and iteration of the checkpoints
