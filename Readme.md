@@ -3,7 +3,7 @@
 
 **`Team Members`:** Dongxu Guo, Jiaan Zhu, Lei Wang
 
-This GitHub hosts the code for Project 2 of Machine Learnin(CS-433). In this project we implement and train neural network for road segmentation,
+This GitHub page hosts the code for Project 2 of Machine Learnin(CS-433). In this project we implement and train neural network for road segmentation,
 i.e. assigning labels `road=1`, `background=0` to each pixel in satilite images. The model is based on U-Net from [Ronneberger et al. (2015)](https://arxiv.org/pdf/1505.04597.pdf).
 
 ![](u-net.png)
